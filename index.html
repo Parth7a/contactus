@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form id="contact-form" onsubmit="return myForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" >
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" >
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" ></textarea>
+        
+        <button type="submit">Submit</button>
+        <div id="success-message" style="color: green;"></div>
+        <p id="errMsg" style="color: red;"></p>
+    </form>
+
+    <script>
+        function myForm() {
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var message = document.getElementById("message").value.trim();
+            var errMsg = document.getElementById("errMsg");
+            var successMessage = document.getElementById("success-message");
+            
+            errMsg.textContent = "";
+            successMessage.textContent = "";
+
+            if (name === "") {
+                errMsg.textContent = "Please enter your name.";
+                return false;
+            }
+
+            var mail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email === "") {
+                errMsg.textContent = "Please enter your email.";
+                return false;
+            }
+            if (!mail.test(email)) {
+                errMsg.textContent = "Invalid email format.";
+                return false;
+            }
+            if (message === "") {
+                errMsg.textContent = "Please enter your message.";
+                return false;
+            }
+
+            // Display success message
+            console.log("Form submitted successfully.");
+            successMessage.textContent = "Your message has been sent successfully!";
+            return false; // Prevent actual form submission for demonstration
+        }
+    </script>
+</body>
+</html>
